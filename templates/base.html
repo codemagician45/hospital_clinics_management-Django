@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>Hospital Management</title>
+
+	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="/static/datatables.min.css"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body background='/static/images/trees.png'>
+
+	<div id="wrapper">
+		<div id="header" style="margin:25px">
+			<h1>Radiology examination</h1>
+		</div>
+		<!-- <div id="top_dropdown">
+			<ul class="box">
+				<li class="box">
+					<a href="/">Home</a>
+				</li>
+				<li class="dropdown">
+					<button class="dropbtn">News</button>
+					<div class="dropdown-content">
+						<a href="https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSkwyMHZNREV6ZURSdEVnVmxiaTFIUWlnQVAB">google news</a>
+					</div>
+				</li>
+				<li class="dropdown">
+					<button class="dropbtn">procedures</button>
+					<div class="dropdown-content">
+						<a href="Angiography.html">Angiography</a>
+						<a href="Biopsy.html">Biopsy</a>
+					</div>
+				</li>
+				<li class="dropdown">
+					<button class="dropbtn">booking</button>
+					<div class="dropdown-content">
+						<a href="booking.html">booking</a>
+						<a href="chating.html">chating</a>
+						<a href="/clinics">Finding Clinics</a>
+					</div>
+				</li>
+			</ul>
+		</div> -->
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<!-- Brand -->
+			<a class="navbar-brand" href="/admin/">Admin</a>
+
+			<!-- Links -->
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="/">HOME</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle"  id="booking" data-toggle="dropdown">
+						NEWS
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSkwyMHZNREV6ZURSdEVnVmxiaTFIUWlnQVAB" target="_blank">Google News</a>
+					</div>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">PROCEDURES</a>
+				</li>
+
+				<!-- Dropdown -->
+				<li class="nav-item dropdown">
+					<div class="nav-link dropdown-toggle"  id="booking" data-toggle="dropdown">
+						BOOKING
+					</div>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="/bookingResult">Booking</a>
+						<a class="dropdown-item" href="#">Chatting</a>
+						<a class="dropdown-item" href="/clinics">Finding Clinics</a>
+					</div>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	{% block content %}
+	{% endblock %}
+</body>
+
+</html>
