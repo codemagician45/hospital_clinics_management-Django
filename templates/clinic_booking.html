@@ -19,15 +19,8 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
-	<!-- <script type='text/javascript'>
-		$( document ).ready(function() {
-			$('#datetimepicker1').datetimepicker();
-		});
-	</script> -->
-    
 </head>
 <body>
-{% for c_booking in c_booking %}
 
 <div class="container">
     <h3 style="text-align: center;"><span style="font-weight: bold;">{{c_booking.name}}&nbsp;&nbsp;</span>Clinic Booking System</h3>
@@ -51,13 +44,13 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label">First Name</label>
-                    <input type="text" class="form-control" name="fname" id="fname" required>
+                    <input type="text" class="form-control" name="fname" id="fname" required value="{{current_user.first_name}}">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label">Last Name</label>
-                    <input type="text" class="form-control" name="lname" id="lname" required>
+                    <input type="text" class="form-control" name="lname" id="lname" required value="{{current_user.last_name}}">
                 </div>
             </div>
             </div>
@@ -65,13 +58,13 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" required>
+                    <input type="email" class="form-control" name="email" id="email" required value="{{current_user.email}}">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label">Date of Birth</label>
-                    <input type="date" class="form-control" name="birth" id="birth" required>
+                    <input type="date" class="form-control" name="birth" id="birth" required value="{{current_user.birth}}">
                 </div>
             </div>
 
@@ -111,59 +104,51 @@
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" id="resultModal">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h3 class="modal-title" id="booking_confirm">{{c_booking.name}}</h3>
-        </div>
-        <div class="modal-body">
-        </div>
-        <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+            <div class="modal-header">
+                <h3 class="modal-title" id="booking_confirm">{{c_booking.name}}</h3>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
-{% endfor %}		
 </body>
 <script>
     $(document).ready(function(){
         $('#datetimepicker1').datetimepicker({ 
-            // format: 'DD/MM/YYYY',
             daysOfWeekDisabled: [0,6],
             enabledHours: [ 8, 9, 10, 11, 12, 13, 14, 15, 16],
             stepping: 30
-            // step:30
         }); 
     });
-        $('#cancel').click(function(){
-            var oldURL = document.referrer;
-            location.href = oldURL;
+    $('#cancel').click(function(){
+        var oldURL = document.referrer;
+        location.href = oldURL;
+    });
+    $('#booking-form').on('submit', function(e){
+        e.preventDefault();
+        var firstName = $('#fname').val();
+        var lastName = $('#lname').val();
+        var email = $('#email').val();
+        var dateTime = $('#datetime').val();
+        var birth = $('#birth').val();
+        var phone = $('#phone').val();
+        var token = '{{csrf_token}}';
+        $.ajax({
+            headers: { "X-CSRFToken": token },
+            type: 'POST',
+            url: "confirmBooking/",
+            data: { fname:firstName,lname:lastName,email:email,datetime:dateTime,birth:birth,phone:phone},
+            success: function(data){
+                console.log(data[0])
+                $('#resultModal').modal('show');
+                var content = '<h4>Dear'+ '&nbsp;&nbsp;<span style="font-weight:bold">'+data[0][1] +'&nbsp;&nbsp;'+ data[0][2] +'</span></h4><h4>Your Booking for <span style="font-weight:bold">'+ data[0][5] +'</span> clinic has now been confirmed successfully.</h4><h4>You should be available on <span style="font-weight:bold">'+ data[0][4] +'</span> in 30 minutes</h4>';
+                $('.modal-body').append(content);
+            }
         });
-        $('#booking-form').on('submit', function(e){
-            e.preventDefault();
-            var firstName = $('#fname').val();
-            var lastName = $('#lname').val();
-            var email = $('#email').val();
-            var dateTime = $('#datetime').val();
-            var birth = $('#birth').val();
-            var phone = $('#phone').val();
-            var token = '{{csrf_token}}';
-            $.ajax({
-                headers: { "X-CSRFToken": token },
-                type: 'POST',
-                url: "confirmBooking/",
-                data: { fname:firstName,lname:lastName,email:email,datetime:dateTime,birth:birth,phone:phone},
-                success: function(data){
-                    console.log(data[0])
-                    $('#resultModal').modal('show');
-                    var content = '<h4>Dear'+ '&nbsp;&nbsp;<span style="font-weight:bold">'+data[0][1] +'&nbsp;&nbsp;'+ data[0][2] +'</span></h4><h4>Your Booking for <span style="font-weight:bold">'+ data[0][5] +'</span> clinic has now been confirmed successfully.</h4><h4>You should be available on <span style="font-weight:bold">'+ data[0][4] +'</span> in 30 minutes</h4>';
-                    $('.modal-body').append(content);
-                }
-            });
-        });
-        
-             
-        // Bootstrap DateTimePicker v4
-        
-        
+    });   
 </script>
 </html>

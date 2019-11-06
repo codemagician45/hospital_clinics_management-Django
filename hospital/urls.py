@@ -23,8 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('clinics/', include('clinics.urls')),
-    path('bookingResult/', views.AllBooking),
-    path('bookingResult/result', views.getAllBooking)
+    path('accounts/', include('accounts.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -11,10 +11,18 @@
             </div>
             <div>
                 <hr>
-                {% if booked_clinic is None %}
-                <a href="booking"><button class="btn btn-primary" style="width: 60%; margin-top:20px">Book Now</button></a>
+                {% if user.is_authenticated and role == '2' %}
+                    {% if booked_clinic is None %}
+                        <a href="booking"><button class="btn btn-primary" style="width: 60%; margin-top:20px">Book Now</button></a>
+                    {% else %}
+                        {% if booked_clinic.status %}
+                            <h5 style="color:grey">This Booking has been {{booked_clinic.status}}</h5>
+                        {% else %}
+                            <h5 style="color:grey">You have already Booked to this clinic</h5>
+                        {% endif %}
+                    {% endif %}
                 {% else %}
-                <h5 style="color:grey">You already Booked to this clinic</h5>
+                    <h5>You should <a href="/accounts/login/">login</a> as a <span><strong>Patient</strong></span> to Book</h5>
                 {% endif %}
             </div>
             <input type="hidden" name="longitude" id="longitude" value="{{clinic.longitude}}">

@@ -4,7 +4,9 @@
     <h2 style="text-align: center;">Clinics Deployment</h2>
     <div class="row" style="margin-top: 20px;">
         <div class="col-12">
-        <div id="map-canvas" style="width:100%; height: 600px;"></div>
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+            <div id="map-canvas" style="width:100%; height: 600px;"></div>
+            </div>
         </div>
     </div>
     
@@ -30,7 +32,6 @@
                 for(var i = 0;i<data.length;i++){
                     markers1[i] = data[i];
                 }
-                // console.log(markers1[0]);
                 markerCount = markers1.length
                 /** Function to init map */
                 function initialize() {
@@ -40,11 +41,47 @@
                         center: center,
                         mapTypeId: google.maps.MapTypeId.TERRAIN
                     };
-
+                    //mark
                     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
                     for (i = 0; i < markerCount; i++) {
                         addMarker(markers1[i]);
                     }
+                    // search box
+                    var searchBox = new google.maps.places.SearchBox(document.getElementById('pac-input'));
+	                map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('pac-input'));
+
+                    google.maps.event.addListener(searchBox, 'places_changed', function() {
+                        searchBox.set('map', null);
+
+
+                        var places = searchBox.getPlaces();
+
+                        var bounds = new google.maps.LatLngBounds();
+                        var i, place;
+                        for (i = 0; place = places[i]; i++) {
+                        (function(place) {
+                            var marker = new google.maps.Marker({
+
+                            position: place.geometry.location
+                            });
+                            google.maps.event.addListener(marker, 'map_changed', function() {
+                            if (!this.getMap()) {
+                                this.unbindAll();
+                            }
+                            });
+                            bounds.extend(place.geometry.location);
+
+
+                        }(place));
+
+                        }
+                        map.fitBounds(bounds);
+                        searchBox.set('map', map);
+                        map.setZoom(Math.min(map.getZoom(),12));
+
+                    });
+
+
                 }
                 /** Function to add marker to map */
                 function addMarker(marker) {

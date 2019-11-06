@@ -5,50 +5,109 @@
         <div class="col-md-12">
             <div class="container box" style="margin-top: 40px; width: 100% !important;">
                 <h2 style="text-align: center;">Booking Results</h2>
+                {% if role == '1' %}
                 <div class="table-responsive">
-                <table id="booking" class="table table-bordered table-scriped" style="width: 100% !important">
-                    <thead style="background: cadetblue;">
-                    <tr>
-                        <th style="width:55%;">Clinic Name</th>
-                        <th style="width:15%;">Patient Name</th>
-                        <th style="width:15%;">Patient Email</th>
-                        <th style="width:15%;">Booking Date</th>
-                        <!-- <th style="width:10%;">Delete</th> -->
-                    </tr>
+                    <table id="booking">
+                    <thead>
+                        <tr>
+                            <th>Clinic Name</th>
+                            <th>Patient Name</th>
+                            <th>Patient Email</th>
+                            <th>Patient Birthday</th>
+                            <th>Patient Phone</th>
+                            <th>Booking Date/Time</th>
+                            <th colspan="2">Booking Date/Time</th>
+                            <!-- <th style="width:5%;">Booking Date</th> -->
+                        </tr>
                     </thead>
+                    <tbody>
+                        {% for book in all %}
+                            <tr>
+                                <input type="hidden" value="{{book.id}}">
+                                <td>{{book.clinic_name}}</td>
+                                <td>{{book.fname}} &nbsp; {{book.lname}}</td>
+                                <td>{{book.email}}</td>
+                                <td>{{book.birthday}}</td>
+                                <td>{{book.phone}}</td>
+                                <td>{{book.dateTime}}</td>
+                                {% if book.status == 'accepted' %}
+                                    <td>
+                                        <p>Accepted</p>
+                                    </td>
+                                    <td></td>
+                                {% elif book.status == 'rejected' %}
+                                    <td></td>
+                                    <td>
+                                        <p>Rejected</p>
+                                    </td>
+                                {% else %}
+                                    <td>
+                                        <p id="accepted{{book.id}}" style="display: none;">Accepted</p>
+                                        <button class="btn btn-success accept_btn" id="accept{{book.id}}">Accept</button>
+                                    </td>
+                                    <td>
+                                        <p id="rejected{{book.id}}" style="display: none;">Rejected</p>
+                                        <button class="btn btn-danger reject_btn" id="reject{{book.id}}">Reject</button>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
                 </div>
+                {% else %}
+                    <h5 style="text-align: center;">You are not available to see Booking results</h5>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
-<!-- <script src="/static/datatables.min.js"></script> -->
 <script type="text/javascript">
-    $(document).ready(function(){
-        console.log("ddd")
+      $(document).ready(function(){
         var token = '{{csrf_token}}';
-        var dataTable = $('#booking').DataTable({
-        "processing":true,
-        "serverSide":true,
-        "order":[],
-        "ajax":{
-            headers: { "X-CSRFToken": token },
-            type: 'POST',
-            url: "result/",
-            dataSrc: function ( data ) {
-                $('.dataTables_wrapper').removeClass('table-loading');
-                return data.data;
-            }
-        },    
-        "columns":[
-        {data:"clinic"},
-        {data:"p_name"},
-        {data:"p_email"},
-        {data:"date"}
-        ]
-    });
-});
-</script>
+        $('.accept_btn').on('click',function(){
+            var tdv = this.parentNode;
+            var trv = tdv.parentNode;
+            var inp = trv.children[0]['value'];
+            var data = 'accepted';
+            var book_id = inp;
+            $.ajax({
+                headers: { "X-CSRFToken": token },
+                type: 'POST',
+                url: "/clinics/booking_permission",
+                data: {status:data, book_id:book_id},
+                success: function (res) {
+                    console.log(res)
+                    $('#'+'accept'+res).css("display","none");
+                    $('#'+'accepted'+res).css("display","block");
+                    $('#'+'reject'+res).css("display","none");
+                }
+            });
+        })
+
+        $('.reject_btn').on('click',function(){
+            var tdv = this.parentNode;
+            var trv = tdv.parentNode;
+            var inp = trv.children[0]['value'];
+            var data = 'rejected';
+            var book_id = inp;
+            $.ajax({
+                headers: { "X-CSRFToken": token },
+                type: 'POST',
+                url: "/clinics/booking_permission",
+                data: {status:data, book_id:book_id},
+                success: function (res) {
+                    console.log(res)
+                    $('#'+'reject'+res).css("display","none");
+                    $('#'+'rejected'+res).css("display","block");
+                    $('#'+'accept'+res).css("display","none");
+                }
+            });
+        })
+            
+        
+      });
+    </script>
 {% endblock %}
 
     

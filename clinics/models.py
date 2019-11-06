@@ -23,4 +23,7 @@ class Booking(models.Model):
     clinic_id = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+    # clinic = models.ForeignKey(Clinics,on_delete=models.CASCADE,related_name='students')
+    clinic_name = models.CharField(max_length=100)
+    status = models.CharField(max_length=20)
+    bookedfrom = models.IntegerField()
