@@ -2,8 +2,6 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
-
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hospital.settings')
     try:
@@ -15,6 +13,8 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     # sys.argv.append('runserver')
+    if (sys.argv.__len__() == 1):
+        sys.argv.append('runserver')
     execute_from_command_line(sys.argv)
 
 

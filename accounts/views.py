@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -33,8 +32,7 @@ def register(request):
             if(account.role == '2'):
                 messages.success(request, f"New Patient Account created: {username}")
                 messages.info(request, f"You are now log in {username}")
-
-            login(request,user)
+            login(request, user,backend='django.contrib.auth.backends.ModelBackend')
             return redirect('/')
     else:
         return render(request, 'reg_form.html')

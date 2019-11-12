@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" style="margin-top: 50px;">
+        <h2>From Doctor</h2>
+        <div class="row" style="margin-bottom: 20px;">
+            
+            <div class="contain">
+                <h5 style="text-align: center;">Recent Message</h5>
+                <div>
+                    {% if last_data %}
+                    <div style="margin-left:10px">
+                        <p>{{last_data.content}}</p>
+                        {% if last_data.file %}
+                            <a href="{{last_data.file.url}}" target="_blank" >
+                                <img src="/static/images/download.png" style="width:45px;"/>{{last_data.file.name}}
+                            </a>
+                        {% endif %}
+                        <p>{{last_data.created_at}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <input type="hidden" id="last_msg" value="{{last_data.id}}">
+    </div> 
+<script>
+        $(document).ready(function(){
+            var last_id = $('#last_msg').val()
+            if (last_id == '') last_id = 0;
+            var token = '{{csrf_token}}';
+            (function worker() {
+                $.ajax({
+                    headers: { "X-CSRFToken": token },
+                    type: 'POST',
+                    url: "/chat/download/",
+                    success:function(data){
+                        id = data[0][0];
+                        if(id>last_id){
+                            last_id = id
+                            // console.log(data)
+                            if(data[0][3])
+                                $('.contain').append(
+                                    '<div style="margin-left:20px"><div style="margin-left:10px"><p>'+ data[0][1] +'</p><a href="'+ data[0][2] +'" target="_blank" ><img src="/static/images/download.png" style="width:35px;height:24px;"/>'+data[0][3]+'</a><p style="float: right;margin-right: 20px;">'+data[0][4]+'</p></div></div>'
+                                )
+                            else
+                                $('.contain').append(
+                                    '<div style="margin-left:20px"><div style="margin-left:10px"><p>'+ data[0][1] +'</p><p style="float: right;margin-right: 20px;">'+data[0][2]+'</p></div></div>'
+                                )
+                        }
+                            
+                    },
+                    complete: function() {
+                        setTimeout(worker, 1000);
+                    }
+                });
+            })();
+        });
+    </script>
+{% endblock %}
+
+

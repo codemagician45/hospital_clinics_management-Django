@@ -16,8 +16,8 @@
                             <th>Patient Birthday</th>
                             <th>Patient Phone</th>
                             <th>Booking Date/Time</th>
-                            <th colspan="2">Booking Date/Time</th>
-                            <!-- <th style="width:5%;">Booking Date</th> -->
+                            <th colspan="2">Booking Status</th>
+                            <th>Send Message</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,6 +50,7 @@
                                         <button class="btn btn-danger reject_btn" id="reject{{book.id}}">Reject</button>
                                     </td>
                                 {% endif %}
+                                <td style="text-align: center;"><a href="/chat/upload/{{book.bookedfrom}}"><i class="fa fa-comments fa-lg" aria-hidden="true"></i></td>
                             </tr>
                         {% endfor %}
                     </tbody>

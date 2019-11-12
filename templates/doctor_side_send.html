@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" style="margin-top: 50px;">
+        <h2>To Booked Patients</h2>
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="contain">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <form method="POST"  enctype="multipart/form-data"  id="send-form">
+                    {% csrf_token %}
+                    <!-- <div class="form-group" app-field-wrapper="booked_patient"> -->
+                    <h5>To <span style="color: brown;" id="booked_patient">{{booked_user.fname}}&nbsp;{{booked_user.lname}}<span></h5>
+                    <input type="hidden" id="p_id" value="{{booked_user.bookedfrom}}" >   
+                        <!-- <label for="booked_patient" class="control-label">Select Booked Patient</label> -->
+                        <!-- <select class="form-control" name="booked_patient" id="booked_patient">
+                            {% for booked_user in booked_users %}
+                                <option value="{{booked_user.0}}">{{booked_user.1}}&nbsp;{{booked_user.2}}</option>
+                            {% endfor %}
+                        </select> -->
+                    <!-- </div> -->
+                    <div class="form-group" app-field-wrapper="content">
+                        <label for="content" class="control-label">Write Message</label>
+                        <textarea class="form-control" rows="5" id="msg" name="content"></textarea>
+                    </div>
+                    <div class="form-group" app-field-wrapper="document" style="display: flex;" >
+                        <input type="file" name="document" class="form-control" id="document" style="width: 60%;">
+                        <button type="submit" class="btn btn-primary" style="margin-left: 35%;">Send</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+<script>
+    $(document).ready(function(){
+        var token = '{{csrf_token}}';
+        $('#send-form').submit(function(e){
+            e.preventDefault()
+            // var booked_p = $('#booked_patient option:selected').html();
+            booked_p = $('#booked_patient').html();
+            p_id = $('#p_id').val();
+            $.ajax({
+                headers: { "X-CSRFToken": token },
+                type: 'POST',
+                url: "/chat/upload/"+p_id+'/',
+                data:new FormData(this),
+                contentType:false,
+                processData:false,
+                success: function (res) {
+                    $('#send-form')[0].reset()
+                    // console.log($('#send-form'))
+                    console.log(res)
+                    if(res[0][3])
+                        $('.contain').append(
+                            '<div style="margin-left:20px"><p><strong>('+ booked_p +')</strong></p><div style="margin-left:10px"><p>'+ res[0][0] +'</p><a href="'+ res[0][1] +'" target="_blank" ><img src="/static/images/download.png" style="width:35px;height:24px"/>'+res[0][2]+'</a><p style="float: right;margin-right: 20px;">'+res[0][3]+'</p></div></div>'
+                        )
+                    else
+                        $('.contain').append(
+                                '<div style="margin-left:20px"><p><strong>('+ booked_p +')</strong></p><div style="margin-left:10px"><p>'+ res[0][0] +'</p><p style="float: right;margin-right: 20px;">'+res[0][1]+'</p></div></div>'
+                            )
+                }
+            });
+        });
+    });
+</script> 
+{% endblock %}

@@ -145,7 +145,7 @@
             success: function(data){
                 console.log(data[0])
                 $('#resultModal').modal('show');
-                var content = '<h4>Dear'+ '&nbsp;&nbsp;<span style="font-weight:bold">'+data[0][1] +'&nbsp;&nbsp;'+ data[0][2] +'</span></h4><h4>Your Booking for <span style="font-weight:bold">'+ data[0][5] +'</span> clinic has now been confirmed successfully.</h4><h4>You should be available on <span style="font-weight:bold">'+ data[0][4] +'</span> in 30 minutes</h4>';
+                var content = '<h4>Dear'+ '&nbsp;&nbsp;<span style="font-weight:bold">'+data[0][1] +'&nbsp;&nbsp;'+ data[0][2] +'</span></h4><h4>Thank you for book <span style="font-weight:bold">'+ data[0][5] +'</span> clinic.</h4><h4>You should be available on <span style="font-weight:bold">'+ data[0][4] +'</span> in 30 minutes</h4>';
                 $('.modal-body').append(content);
             }
         });

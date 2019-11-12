@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'clinics.apps.ClinicsConfig',
     'accounts',
     'social_django',
+    'chat',
 ]
 
 
