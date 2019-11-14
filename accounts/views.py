@@ -20,8 +20,8 @@ def register(request):
             account.user = user
             account.username = request.POST.get("username")
             account.email = request.POST.get("email")
-            account.firstName = request.POST.get("firstName")
-            account.lastName = request.POST.get("lastName")
+            account.first_name = request.POST.get("firstName")
+            account.last_name = request.POST.get("lastName")
             account.password = request.POST.get("password")
             account.birth = request.POST.get("birth")
             account.role = request.POST.get("role")
@@ -29,44 +29,31 @@ def register(request):
             if(account.role == '1'):
                 messages.success(request, f"New Doctor Account created: {username}")
                 messages.info(request,f"You are now log in {username}")
+                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                return redirect('/accounts/doctor')
             if(account.role == '2'):
                 messages.success(request, f"New Patient Account created: {username}")
                 messages.info(request, f"You are now log in {username}")
-            login(request, user,backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('/')
+                login(request, user,backend='django.contrib.auth.backends.ModelBackend')
+                return redirect('/')
     else:
         return render(request, 'reg_form.html')
 
-
-# def login_request(request):
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request=request, data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 messages.info(request, f"You are now logged in as {username}")
-#                 return redirect('/')
-#             else:
-#                 messages.error(request, "Invalid username or password.")
-#         else:
-#             messages.error(request, "Invalid username or password.")
-#     form = AuthenticationForm()
-#     return render(request=request,
-#                   template_name="login_form.html",
-#                   context={"form": form})
-
 def login_request(request):
+    doctor = ''
     if request.method == 'POST':
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.info(request, f"You are now logged in as {username}")
-            return redirect('/')
+            doctor = Accounts.objects.filter(username=username).first().role
+            if doctor == '1':
+                messages.info(request, f"You are now logged in as Doctor {username}")
+                return redirect('/accounts/doctor')
+            else:
+                messages.info(request, f"You are now logged in as Patient {username}")
+                return redirect('/')
         else:
             messages.error(request, "Invalid username or password.")
             return render(request, 'login_form.html')
@@ -77,3 +64,7 @@ def logout_request(request):
     logout(request)
     messages.info(request,"Logged out successfully!")
     return redirect("/")
+
+def doctor(request):
+    current_doctor = Accounts.objects.filter(username=request.user.username).first()
+    return render(request,'doctor.html',{'doctor':current_doctor})

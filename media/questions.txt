@@ -1,0 +1,12 @@
+Have you ever had any previous surgery?
+Yes/NO
+
+Have you had an injury to the eye involving any metal?
+Yes/NO
+
+Have you ever been injured by a metallic object?
+Yes/NO
+
+Are you pregnant or suspect that you are pregnant?
+Yes/No
+

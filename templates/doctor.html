@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+	<style>
+		li{
+			float: left;
+			margin-right: 15%;
+		}
+		li a {
+			font-size: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="section_nav">
+		<div class="wrapper">
+			<div class="header">
+				<div class="homepage_icon">
+					<h3>Radiology examination</h3>
+				</div>
+				<div class="logout top_margin">
+					<a href="/accounts/logout" class="nav_font">Logout</a>
+				</div>
+			</div>
+			<div class="header">
+				<ul class="box" style="background-color: #e1e8f5;">
+					<p class="nav_font left_margin">Dear Doctor <span style="color: brown;">{{doctor.first_name}}</span></p>
+				</ul>
+			</div>
+		</div>
+	<div class="wrapper">
+		<div class="doctorpage_div">
+			<image src="/static/images/Calenda.jpg" class="doctorpage_button"></image>
+			<a href="/clinics/booking" class="doctorpage_button_font doctor_a">Request of booking</a>
+			<p style="margin-left: 10px;">Check new appointment from patients</p>
+		</div>
+		<div class="doctorpage_div">
+			<image src="/static/images/rainbow.jpg" class="doctorpage_button"></image>
+			<a href="" class="doctorpage_button_font doctor_a">Meassages</a>
+			<p style="margin-left: 10px;">Check new messages from patients</p>
+		</div>
+	</div>
+	<div class="footer_sec">
+		<div class="wrapper">
+
+			<div class="footer_col" style="width: 100%;">
+				<!-- <p class="footer_font">Maybe you are looking for:</p>	 -->
+				<ul class="">
+					<li style="margin-left: 10%;">
+						<a href='procedures.html' class="footer_font" style="font-size: 20px;">Procedures</a>
+					</li>
+					<li>
+						<a href="booking.html" class="footer_font" style="font-size: 20px;">Booking</a>
+					</li>
+					<li>
+						<a href="chating.html" class="footer_font" style="font-size: 20px;">Chating</a>
+					</li>
+					<li>
+						<a href="#top" class="footer_font" style="font-size: 20px;">Contact us</a>
+					</li>
+				</ul>
+				<p class="footer_font" style="text-align: center;font-size: 20px;">Comprehensive care. Uncompromising quality. With these four words we sum up the exceptional service we offer our patients, our referring practitioners and the hospitals and health professionals who rely on us every day.</p>
+			</div>
+			<!-- <div class="footer_col">
+				<p class="footer_font">Maybe you are looking for:</p>	
+				<ul class="">
+					<li>
+						<a href='procedures.html' class="footer_font">Procedures</a>
+					</li>
+					<li>
+						<a href="booking.html" class="footer_font">Booking</a>
+					</li>
+					<li>
+						<a href="chating.html" class="footer_font">Chating</a>
+					</li>
+					<li>
+						<a href="#top" class="footer_font">Contact us</a>
+					</li>
+				</ul>
+			</div> -->
+			<!-- <div class="back_to_top">
+				<a href="#top" class="footer_font">Back to top</a>
+			</div> -->
+		</div>
+	</div>
+	
+	{% if messages %}
+		{% for message in messages %}
+			{% if message.tags == 'success'%}
+				<!-- <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:5000});</script> -->
+				<script> var toastHTML = '<div style="height:30px;width:30%; background:green"><span style="color:white;font-size:20px;margin-left:10%;text-align:center">{{message}}</span></div>';
+					M.toast({html: toastHTML , displayLength:2000});</script>
+			{% elif message.tags == 'info'%}
+				<script> var toastHTML = '<div style="height:30px;width:25%; background:blue"><span style="color:white;font-size:20px;margin-left:10%;text-align:center">{{message}}</span></div>';
+					M.toast({html: toastHTML , displayLength:2000});</script>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+</body>
+</html>
+
+<script type="text/javascript">
+    function myFunction1() {
+        var div1 = document.getElementById('1');
+        var div2 = document.getElementById('2');
+        if(div2.style.display = 'none') {
+            div1.style.display ='none';
+            div2.style.display = 'block';
+        }
+    }
+    function myFunction2() {
+        var div1 = document.getElementById('1');
+        var div2 = document.getElementById('2');
+        if(div1.style.display = 'none') {
+            div2.style.display ='none';
+            div1.style.display = 'block';
+        }
+    }
+	function openDialog() {
+	    document.getElementById('1').style.display='block';
+	    document.getElementById('fade').style.display='block'
+	}
+	function closeDialog() {
+	    document.getElementById('1').style.display='none';
+	    document.getElementById('2').style.display='none';
+	    document.getElementById('fade').style.display='none'
+	}
+	$("#but").click(function(){
+		if($("#procedure_hide").css("display")=="none"){
+			$("#procedure_hide").show();
+		}else{
+			$("#procedure_hide").hide();
+		}
+	});
+	// function hide_signup(event) {
+	// 	var x = event.target;
+	// 	if(x.tagName != 'DIV' || 'BUTTON') {
+	// 		document.getElementById('1').style.display='none';
+	// 		document.getElementById('2').style.display='none';
+	// 	}
+	// }
+
+
+</script>

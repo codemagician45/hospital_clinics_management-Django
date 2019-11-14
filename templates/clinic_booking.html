@@ -4,21 +4,39 @@
 <title>Adding a DateTime Picker with Bootstrap by solodev</title>
 
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/awesome-bootstrap-checkbox.css">
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<style type="text/css">
 		.container {
-			margin-top: 120px;
+			margin-top: 60px;
 		}
 		.btn-primary {
 			width: 100%;
 		}
+        .que {
+            position: relative;
+            margin-left: 10%;
+            display: flex;
+        }
+        .answer_y {
+            display: flex;
+            position: absolute;
+            right: 40%;
+            }
+        .answer_n {
+            display: flex;
+            position: absolute;
+            right: 32%;
+            }
+        
 	</style>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script> 
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-
 </head>
 <body>
 
@@ -30,10 +48,10 @@
         {% csrf_token %}
         <div class="panel-body">
             <div class="row">
-            <div class="col-md-12">
-                    <h5 style="text-align: right;"><span style="font-weight:bold">Address:&nbsp;</span>{{c_booking.address}}</h5>
-            </div> 
-            <div class="col-md-12">
+                <div class="col-md-12">
+                        <h5 style="text-align: right;"><span style="font-weight:bold">Address:&nbsp;</span>{{c_booking.address}}</h5>
+                </div> 
+                <div class="col-md-12">
                     <h5 style="text-align: right;"><span style="font-weight:bold">Phone:&nbsp;</span>{{c_booking.phone}}</h5>
                 </div>
                 <div class="col-md-12">
@@ -41,60 +59,138 @@
                 </div>  
             </div>
             <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">First Name</label>
-                    <input type="text" class="form-control" name="fname" id="fname" required value="{{current_user.first_name}}">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">First Name</label>
+                        <input type="text" class="form-control" name="fname" id="fname" required value="{{current_user.first_name}}">
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">Last Name</label>
-                    <input type="text" class="form-control" name="lname" id="lname" required value="{{current_user.last_name}}">
-                </div>
-            </div>
-            </div>
-            <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" required value="{{current_user.email}}">
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">Date of Birth</label>
-                    <input type="date" class="form-control" name="birth" id="birth" required value="{{current_user.birth}}">
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">Phone</label>
-                    <input type="text" class="form-control" name="phone" id="phone" required>
-                </div>
-            </div>
-
-            <div class='col-md-6'>
-                <div class="form-group">
-                    <label class="control-label">Appointment Time</label>
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" name="datetime" id="datetime" required />
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Last Name</label>
+                        <input type="text" class="form-control" name="lname" id="lname" required value="{{current_user.last_name}}">
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" required value="{{current_user.email}}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Date of Birth</label>
+                        <input type="date" class="form-control" name="birth" id="birth" required value="{{current_user.birth}}">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Phone</label>
+                        <input type="text" class="form-control" name="phone" id="phone" required>
+                    </div>
+                </div>
+
+                <div class='col-md-6'>
+                    <div class="form-group">
+                        <label class="control-label">Appointment Time</label>
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" name="datetime" id="datetime" required />
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 style="margin-left: 8%;">Questions</h4>
+                    <div class="form-group">
+                        <div class="que">
+                            <p>Have you ever had any previous surgery?</p>
+                            <div class="radio radio-info radio-inline answer_y">
+                                <input type="radio" id="first_y" value="1"  name="first" checked>
+                                <label for="first_y"> Yes </label>
+                            </div>
+                            <div class="radio radio-inline answer_n">
+                                <input type="radio" id="first_n" value="0" name="first">
+                                <label for="first_n"> No </label>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="form-group">
+                        <div class="que">
+                            <p>Have you had an injury to the eye involving any metal?</p>
+                            <div class="radio radio-info radio-inline answer_y">
+                                <input type="radio" id="second_y" value="1"  name="second" checked>
+                                <label for="second_y"> Yes </label>
+                            </div>
+                            <div class="radio radio-inline answer_n">
+                                <input type="radio" id="second_n" value="0" name="second">
+                                <label for="second_n"> No </label>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="form-group">
+                        <div class="que">
+                            <p>Have you ever been injured by a metallic object?</p>
+                            <div class="radio radio-info radio-inline answer_y">
+                                <input type="radio" id="third_y" value="1"  name="third" checked>
+                                <label for="third_y"> Yes </label>
+                            </div>
+                            <div class="radio radio-inline answer_n">
+                                <input type="radio" id="third_n" value="0" name="third">
+                                <label for="third_n"> No </label>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="form-group">
+                        <div class="que">
+                            <p>Are you pregnant or suspect that you are pregnant?</p>
+                            
+                            <div class="radio radio-info radio-inline answer_y">
+                                <input type="radio" id="forth_y" value="1" name="forth" checked>
+                                <label for="forth_y"> Yes </label>
+                            </div>
+                            <div class="radio radio-inline answer_n">
+                                <input type="radio" id="forth_n" value="0" name="forth">
+                                <label for="forth_n"> No </label>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 style="margin-left: 8%;">Instruction</h4>
+                    <div class="form-group que" >
+                        <p>You need to see <a href="/media/instruction.pdf" target="_blank" style="color:blue">instruction</a> about this clinic</p>
+                        <!-- <div class="answer_y">
+                            <input type="checkbox" name="instruction" id="instruction" required>&nbsp;
+                            <p>I have read this instruction</p>
+                        </div> -->
+                        <div class="checkbox checkbox-primary answer_n"style="margin-top:0px">
+                            <input id="instruction" name="instruction" type="checkbox" required>
+                            <label for="instruction">
+                                I have read this instruction
+                            </label>
+                        </div>
+                    </div>
+                    
+                </div>
+                
             </div>
             <div class="row" style="display: flex;justify-content: flex-end;">
                 <div class="col-md-4" >
-                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="submit" class="btn btn-primary" value="Submit" id="submitt">
                 </div>
                 <div class="col-md-4" >
                     <input type="button" class="btn btn-primary" value="Close" id="cancel">
                 </div>
-            </div>  
+            </div>     
         </div>
       </form>
    </div>
@@ -130,23 +226,20 @@
     });
     $('#booking-form').on('submit', function(e){
         e.preventDefault();
-        var firstName = $('#fname').val();
-        var lastName = $('#lname').val();
-        var email = $('#email').val();
-        var dateTime = $('#datetime').val();
-        var birth = $('#birth').val();
-        var phone = $('#phone').val();
+        var datastring = $('#booking-form').serialize();
+        console.log(datastring)
         var token = '{{csrf_token}}';
         $.ajax({
             headers: { "X-CSRFToken": token },
             type: 'POST',
             url: "confirmBooking/",
-            data: { fname:firstName,lname:lastName,email:email,datetime:dateTime,birth:birth,phone:phone},
+            data:datastring,
             success: function(data){
                 console.log(data[0])
                 $('#resultModal').modal('show');
                 var content = '<h4>Dear'+ '&nbsp;&nbsp;<span style="font-weight:bold">'+data[0][1] +'&nbsp;&nbsp;'+ data[0][2] +'</span></h4><h4>Thank you for book <span style="font-weight:bold">'+ data[0][5] +'</span> clinic.</h4><h4>You should be available on <span style="font-weight:bold">'+ data[0][4] +'</span> in 30 minutes</h4>';
                 $('.modal-body').append(content);
+                $('#submitt').css("display","none")
             }
         });
     });   

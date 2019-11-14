@@ -9,7 +9,9 @@ def display_clinics(request):
 
 # before booking : display book button
 def get_clinic(request,slug):
+    print(slug)
     clinic = Clinics.objects.filter(slug=slug).first()
+    print(clinic)
     if request.user.id:
         current_user = request.user
         booked_clinic = Booking.objects.filter(clinic_id = clinic.id,bookedfrom=current_user.id).first()
@@ -64,28 +66,24 @@ def confirm_booking(request,slug):
     clinic_id = clinic.id
     clinic_name = clinic.name
     clinic_link = clinic.slug
+    question = ""
     if request.method == 'POST':
-        fname = request.POST['fname']
-        lname = request.POST['lname']
-        email = request.POST['email']
-        birthday = request.POST['birth']
-        phone = request.POST['phone']
-        booking_dateTime = request.POST['datetime']
-
-    booking = Booking()
-    booking.fname = fname
-    booking.email = email
-    booking.lname = lname
-    booking.birthday = birthday
-    booking.phone = phone
-    booking.dateTime = booking_dateTime
-    booking.clinic_id = clinic_id
-    booking.clinic_name = clinic_name
-    booking.bookedfrom = current_user.id
-    booking.clinic_link = clinic_link
-    booking.save()
+        booking = Booking()
+        booking.fname = request.POST['fname']
+        booking.email = request.POST['email']
+        booking.lname = request.POST['lname']
+        booking.birthday = request.POST['birth']
+        booking.phone = request.POST['phone']
+        booking.dateTime = request.POST['datetime']
+        booking.clinic_id = clinic_id
+        booking.clinic_name = clinic_name
+        booking.bookedfrom = current_user.id
+        booking.clinic_link = clinic_link
+        que = [request.POST['first'],request.POST['second'],request.POST['third'],request.POST['forth']]
+        question = convert(que)
+        booking.question = question
+        booking.save()
     data = Booking.objects.latest('created_at')
-
     clinic1 = Clinics.objects.filter(id = data.clinic_id).first()
     res = []
     res.append([data.id,data.fname,data.lname,data.email,data.dateTime,clinic1.name])
@@ -158,7 +156,13 @@ def notification_close(request):
 #             notificated_book = Booking.objects.filter(id=request.POST['id']).update(notificated=1)
 #             return HttpResponse(notificated_book)
 
+def convert(s):
+    # initialization of string to ""
+    str1 = ""
 
+    # using join function join the list s by
+    # separating words by str1
+    return (str1.join(s))
 
 
 

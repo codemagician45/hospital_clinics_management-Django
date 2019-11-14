@@ -11,6 +11,8 @@ class Clinics(models.Model):
     longitude = models.FloatField(max_length=20)
     latitude = models.FloatField(max_length=20)
     image = models.ImageField(default='default.png', blank=True)
+    introduction = models.TextField(max_length=1000)
+    alias = models.CharField(max_length=100)
 
 class Booking(models.Model):
     id = models.AutoField(primary_key=True)
@@ -29,3 +31,5 @@ class Booking(models.Model):
     status = models.CharField(max_length=20)
     notification_close = models.IntegerField(default=0)
     bookedfrom = models.IntegerField()
+    question = models.CharField(max_length=100)
+

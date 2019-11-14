@@ -42,7 +42,7 @@
     {% if messages %}
 		{% for message in messages %}
 			{% if message.tags == 'error' %}
-				<script> var toastHTML = '<div style="height:30px; background:red">&nbsp;<span style="color:white;font-size:20px;text-align:center">{{message}}</span></div>';
+				<script> var toastHTML = '<div style="height:30px; background:red">&nbsp;<span style="color:white;font-size:20px;margin-left:15%;text-align:center">{{message}}</span></div>';
 					M.toast({html: toastHTML , displayLength:2000});</script>
 			{% endif %}
 		{% endfor %}
