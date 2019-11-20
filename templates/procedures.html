@@ -1,0 +1,380 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- <link rel="stylesheet" type="text/css" href="/static/style.css"> -->
+<style type="text/css">
+	.wrapper {
+		position: relative;
+		display: block;
+		max-width: 1200px;
+		margin-right: auto;
+		margin-left: auto;
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+	/*procedure part start*/
+	.procedure_mainpage {
+		margin-right: -15px;
+		margin-left: -15px;
+		text-align: left;
+	}
+
+	.procedure_col {
+		height: 600px;
+		background-color: #636363;
+		padding: 0 0px;
+		width: 25%;
+		position: relative;
+		float: left;
+		display: block;
+		overflow: scroll;
+	}
+
+
+	#Biopsy_hidden{
+		display: none;
+	}
+	#Bonedensityscan_hidden{
+		display: none;
+	}
+	#Breastcorebiopsy_hidden{
+		display: none;
+	}
+	#Breastultrasound_hidden{
+		display: none;
+	}
+	#Cardiacservices_hidden{
+		display: none;
+	}
+	#CTcolonography_hidden{
+		display: none;
+	}
+	#CTscan_hidden{
+		display: none;
+	}
+	#Dentalx-ray_hidden{
+		display: none;
+	}
+	#Generalx-ray_hidden{
+		display: none;
+	}
+
+
+	.procedure_page {
+		background-color: #ededed;
+		height: 600px;
+		padding: 0 0px;
+		width: 60%;
+		position: relative;
+		float: left;
+	}
+
+	.procedure_content {
+		width: 80%;
+		margin-left: 10%; 
+		margin-right:10%;
+	}
+
+	.procedure_content_heading {
+		display: block;
+		border-top: 1px solid rgba(0,0,0,.15);
+		border-bottom: 2px solid rgba(0,0,0,.15);
+		background-color: #004e9a;
+		background-image: none;
+		background-size: auto;
+	}
+
+	.procedure_content_heading_font {
+		font-family: 'Helvetica Neue',sans-serif;
+		display: block;
+		background-image: none;
+		background-size: auto;
+		text-align: center;
+		color: white;
+		font-size: 30px;
+	}
+
+
+	.procedure_content_para {
+		font-family: 'Helvetica Neue',sans-serif;
+		margin-bottom: 10px;
+		font-size: 18px;
+		color: #004f9a;
+		line-height: 22px;
+		font-weight: 500;
+		text-align: left;
+		letter-spacing: 0;
+		text-transform: none;
+	}
+
+	button.procedure_link:hover {
+		background-color: #ababab;
+	}
+
+	.procedure_link {
+		width: 100%;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		border-bottom: 1px dotted #adadad;
+		font-family: 'Helvetica Neue Light',sans-serif;
+		font-size: 22px;
+		line-height: 26px;
+		background-size: auto;
+		background-repeat: repeat;
+		overflow: hidden;
+		display: inline-block;
+		cursor: pointer;
+	}
+	/*procedure part end*/
+	.nav_font {
+		font-family: 'Helvetica Neue',sans-serif;
+		font-size: 18pt;
+		color: blue;
+		line-height: 19px;
+		font-weight: 300;
+		text-align: left;
+		letter-spacing: 0;
+		text-transform: none;
+		color: #004f9a;
+	}
+
+</style>
+<div class="wrapper" style="margin-top: 80px;">
+	<div class="procedure_col">
+		<button id="Angiography" class="procedure_link">
+			Angiography
+		</button>
+		<button id="Biopsy" class="procedure_link" onmouseover="document.getElementById('Biopsy_hidden').style.display = 'block';document.getElementById('Angiography_hidden').style.display = 'none';" onmouseout="document.getElementById('Biopsy_hidden').style.display = 'none'; document.getElementById('Angiography_hidden').style.display = 'block';">
+			Biopsy
+		</button>
+		<button id="Bone density scan" class="procedure_link" onmouseover="document.getElementById('Bonedensityscan_hidden').style.display = 'block';document.getElementById('Angiography_hidden').style.display = 'none';" onmouseout="document.getElementById('Bonedensityscan_hidden').style.display = 'none'; document.getElementById('Angiography_hidden').style.display = 'block';">
+			Bone density scan
+		</button>
+		<button id="Breast core biopsy" class="procedure_link" onmouseover="document.getElementById('Breastcorebiopsy_hidden').style.display = 'block';document.getElementById('Angiography_hidden').style.display = 'none';" onmouseout="document.getElementById('Breastcorebiopsy_hidden').style.display = 'none'; document.getElementById('Angiography_hidden').style.display = 'block';">
+			Breast core biopsy
+		</button>
+		<button id="Breast ultrasound" class="procedure_link" onmouseover="document.getElementById('Breastultrasound_hidden').style.display = 'block';document.getElementById('Angiography_hidden').style.display = 'none';" onmouseout="document.getElementById('Breastultrasound_hidden').style.display = 'none'; document.getElementById('Angiography_hidden').style.display = 'block';">
+			Breast ultrasound
+		</button>
+		<button id="Cardiac services" class="procedure_link" onmouseover="document.getElementById('Cardiacservices_hidden').style.display = 'block';document.getElementById('Angiography_hidden').style.display = 'none';" onmouseout="document.getElementById('Cardiacservices_hidden').style.display = 'none'; document.getElementById('Angiography_hidden').style.display = 'block';">
+			Cardiac services
+		</button>
+		<button id="CT colonography" class="procedure_link" onmouseover="document.getElementById('CTcolonography_hidden').style.display = 'block';document.getElementById('Angiography_hidden').style.display = 'none';" onmouseout="document.getElementById('CTcolonography_hidden').style.display = 'none'; document.getElementById('Angiography_hidden').style.display = 'block';">
+			CT colonography
+		</button>
+		<button id="CT scan" class="procedure_link" onmouseover="document.getElementById('CTscan_hidden').style.display = 'block';document.getElementById('Angiography_hidden').style.display = 'none';" onmouseout="document.getElementById('CTscan_hidden').style.display = 'none'; document.getElementById('Angiography_hidden').style.display = 'block';">
+			CT scan
+		</button>
+		<button id="Dental x-ray" class="procedure_link" onmouseover="document.getElementById('Dentalx-ray_hidden').style.display = 'block';document.getElementById('Angiography_hidden').style.display = 'none';" onmouseout="document.getElementById('Dentalx-ray_hidden').style.display = 'none'; document.getElementById('Angiography_hidden').style.display = 'block';">
+			Dental x-ray
+		</button>
+		<button id="General x-ray" class="procedure_link" onmouseover="document.getElementById('Generalx-ray_hidden').style.display = 'block';document.getElementById('Angiography_hidden').style.display = 'none';" onmouseout="document.getElementById('Generalx-ray_hidden').style.display = 'none'; document.getElementById('Angiography_hidden').style.display = 'block';">
+			General x-ray
+		</button>
+		<button class="procedure_link">
+			Interventional Procedures
+		</button>
+		<button class="procedure_link">
+			Joint injections
+		</button>
+		<button class="procedure_link">
+			Mammography
+		</button>
+		<button class="procedure_link">
+			MRI
+		</button>
+		<button class="procedure_link">
+			Nuclear medicine
+		</button>
+		<button class="procedure_link">
+			PET scan
+		</button>
+		<button class="procedure_link">
+			Platelet Rich Plasma Therapy
+		</button>
+		<button class="procedure_link">
+			Shoulder hydrodilatation
+		</button>
+		<button class="procedure_link">
+			Transvaginal ultrasound
+		</button>
+		<button class="procedure_link">
+			Ultrasound
+		</button>
+		<button class="procedure_link">
+			Weight bearing MRI
+		</button>
+		<button class="procedure_link">
+			18-22 Week screening pregnancy ultrasound
+		</button>
+		<button class="procedure_link">
+			Weight-bearing computed tomography (CT)
+		</button>
+		<button class="procedure_link">
+			Dynamic 4D CT
+		</button>
+	</div>
+
+	<div id="Angiography_hidden" class="procedure_page" style="overflow: auto;">
+		<div class="procedure_content_heading">
+			<p class="procedure_content_heading_font">General preparation</p>
+		</div>
+		<div class="procedure_content">
+			<p class="procedure_content_para">Some procedures require fasting, specific advice will be given to you before your procedure.</p>
+			<p class="procedure_content_para">Bring all of your usual medication(s) (or a list of your medications) with you to your appointment.</p>
+			<p class="procedure_content_para">Bring any relevant previous imaging (angiograms, X-rays, CT scans, ultrasound or MRIs etc.), so that the medical staff can have all relevant information available on the day.</p>
+			<p class="procedure_content_para">It is useful to arrive at the clinic before the scheduled appointment time so that staff can obtain your medical history, collect information about your current medical problem and discuss the procedure with you.</p>
+			<p class="procedure_content_para">You will be asked to sign a consent form indicating that you understand what is going to happen, you are happy for the procedure to be carried out and your questions have been satisfactorily answered.</p>
+			<p class="procedure_content_para">If you have a history of kidney disease, have previously had an allergic reaction to contrast medium, suffer from any other allergies or have diabetes, you must tell staff when you make the appointment and when you attend for the procedure. This ensures that the appropriate measures are taken to carry out the procedure with maximum safety.</p>
+			<p class="procedure_content_para">If you are taking metformin, aspirin, clopidogrel, warfarin or other blood thinning medications, you must inform staff when you make the appointment and when you attend for the procedure.</p>
+			<p class="procedure_content_para">Make arrangements with a relative or friend to drive you home after the procedure, as you might be given medication that will make you drowsy.</p>
+			<p class="procedure_content_para">If you live a significant distance from a hospital, it might be better in the 24 hours after the procedure, for you to stay overnight nearby.</p>
+		</div>
+	</div>
+
+	<div id="Biopsy_hidden" class="procedure_page">
+		<div class="procedure_content_heading">
+			<p class="procedure_content_heading_font">How to prepare?</p>
+		</div>
+		<div class="procedure_content">
+			<p class="procedure_content_para">No preparation is required.</p>
+			<p class="procedure_content_para">Anticoagulants - If you take blood thinners such as Warfarin or Aspirin you may need to stop this medication prior to the procedure. Please discuss this with your doctor and inform us when you make your appointment.</p>
+			<p class="procedure_content_para">Heart valve replacement - If you have a heart valve replacement, please discuss this with your doctor and inform us when you make your appointment.</p>
+		</div>
+	</div>
+
+	<div id="Bonedensityscan_hidden" class="procedure_page">
+		<div class="procedure_content_heading">
+			<p class="procedure_content_heading_font">How to prepare?</p>
+		</div>
+		<div class="procedure_content">
+			<p class="procedure_content_para">No preparation is required for this procedure. You do not need to fast, and you can take all your medications as usual. It is helpful, but not essential, to wear loose fitting clothing without metal buttons, buckles, fasteners or zippers, as metal objects interfere with the scan. A gown or sheet is provided if clothing needs to be removed.</p>
+			<p class="procedure_content_para">A DEXA scan does involve a very small dose of radiation, which makes this test unsuitable for women who are, or might be, pregnant.</p>
+			<p class="procedure_content_para">If you have had spinal surgery, particularly with metallic implants, or hip surgery (hip replacements, screws or pins) you will need to inform the radiographer carrying out the scan, who might decide to avoid that area.</p>
+			<p class="procedure_content_para">Any radiological investigation using contrast media (Barium enemas, IVP’s and CT scans) or nuclear medicine test might interfere with the accuracy of the DEXA scan if carried out within the last week. This can usually be discussed at the time you book your DEXA scan appointment.</p>
+		</div>
+	</div>
+
+	<div id="Breastcorebiopsy_hidden" class="procedure_page">
+		<div class="procedure_content_heading">
+			<p class="procedure_content_heading_font">How to prepare?</p>
+		</div>
+		<div class="procedure_content">
+			<p class="procedure_content_para">Generally no preparation is needed. You should bring any recent breast imaging (mammograms and/or ultrasounds) and reports for the doctor performing the procedure to review before doing the biopsy. It is advisable to have someone drive you home afterwards.</p>
+			<p class="procedure_content_para">
+			Do not wear talcum powder or deodorant on the day of the biopsy as these can mimic or imitate calcium spots in the breast which makes it harder for the radiologist to identify the abnormality that requires biopsy. You might consider the clothes you wear on the day so you only need to remove clothes from the upper part of your body.</p>
+		</div>
+	</div>
+
+	<div id="Breastultrasound_hidden" class="procedure_page">
+		<div class="procedure_content_heading">
+			<p class="procedure_content_heading_font">How to prepare?</p>
+		</div>
+		<div class="procedure_content">
+			<p class="procedure_content_para">No preparation is necessary for this examination.</p>
+			<p class="procedure_content_para">It is advisable to wear a two piece outfit so that only your top has to be removed to provide access to the breast area.</p>
+		</div>
+	</div>
+
+	<div id="Cardiacservices_hidden" class="procedure_page">
+		<div class="procedure_content_heading">
+			<p class="procedure_content_heading_font">How to prepare?</p>
+		</div>
+		<div class="procedure_content">
+			<p class="procedure_content_para">We provide Cardiac services, please make an appointment for details</p>
+		</div>
+	</div>
+
+	<div id="CTcolonography_hidden" class="procedure_page">
+		<div class="procedure_content_heading">
+			<p class="procedure_content_heading_font">How to prepare?</p>
+		</div>
+		<div class="procedure_content">
+			<p class="procedure_content_para">You will be given clear instructions when booking your appointment. The important thing is to have a clean bowel before the test, so that any polyp or cancer can be detected. The exact instructions may differ depending on any other medical problems you may have, such as diabetes, kidney disease or some heart problems. It is important to tell your referring doctor as well as the radiologist (specialist doctor) supervising the CTC about these. Pregnant women should not have this test.</p>
+			<p class="procedure_content_para">The instructions will be provided as a package comprising written information, instructions and laxative pills. It is important to read and follow these instructions exactly. This preparation will encourage bowel movement, and you may need to go to the toilet more times than usual. Following these instructions and ensuring good bowel preparation is essential for an accurate result. It is important to read and follow the instructions exactly.</p>
+		</div>
+	</div>
+
+	<div id="CTscan_hidden" class="procedure_page">
+		<div class="procedure_content_heading">
+			<p class="procedure_content_heading_font">How to prepare?</p>
+		</div>
+		<div class="procedure_content">
+			<p class="procedure_content_para">Some tests require no preparation, these include: brain, sinus or facial bones, temporal bones (inner ear), spine, knee or wrist, and CTs of the bones.</p>
+			<p class="procedure_content_para">
+			Many types of CT require an injection of an iodinated contrast material to show blood vessels and some organs. For these tests we will ask you to fast (not eat or drink) prior to your appointment. Fasting for 2-4 hours is common and it is usually permitted to drink water over this time to avoid dehydration. It is important that the need to fast does not affect you if you have special dietary requirements (e.g. diabetes). Please check with your doctor or our clinic if you have any concerns.</p>
+			<p class="procedure_content_para">
+			If you do require an iodinated contrast injection for your test, the radiologist or radiographer will discuss this with you. They will then use a needle to insert a cannula (a small plastic tube) into a vein in your arm or the back of your hand so that the iodine contrast can be inserted into the cannula during the test.</p>
+			<p class="procedure_content_para">
+			While the iodinated contrast used for injections is considered very safe, there are precautions that must be taken when using it, particularly if you have poor kidney function or diabetes.</p>
+		</div>
+	</div>
+
+	<div id="Dentalx-ray_hidden" class="procedure_page">
+		<div class="procedure_content_heading">
+			<p class="procedure_content_heading_font">How to prepare?</p>
+		</div>
+		<div class="procedure_content">
+			<p class="procedure_content_para">No preparation is required for dental x-ray procedures. Please bring any previous x-rays with you on the day of your examination.</p>
+		</div>
+	</div>
+
+	<div id="Generalx-ray_hidden" class="procedure_page">
+		<div class="procedure_content_heading">
+			<p class="procedure_content_heading_font">How to prepare?</p>
+		</div>
+		<div class="procedure_content">
+			<p class="procedure_content_para">For a plain x-ray there are no specific preparation instructions. You must however bring the x-ray request form or referral letter from your doctor, as no x-ray examination can be performed without it.</p>
+			<p class="procedure_content_para">Please inform the radiographer who is performing the x-ray if there is any chance you may be pregnant. Safety of the patient and unborn child is the number one priority so a different approach or test may be needed. As some clothing can make it difficult to see the images clearly, be prepared to wear a gown.</p>
+			<p class="procedure_content_para">Be prepared to remove certain items like watches, necklaces and certain types of clothing that contain metal objects such as zips, as these items may interfere with the quality of the image.</p>
+		</div>
+	</div>
+
+	<br style="clear: left;">
+	<p style="clear: left;margin-top: 20px;" class="nav_font">Please contact a clinic for more information</p>
+</div>
+<script src="/static/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+    function myFunction1() {
+        var div1 = document.getElementById('1');
+        var div2 = document.getElementById('2');
+        if(div2.style.display = 'none') {
+            div1.style.display ='none';
+            div2.style.display = 'block';
+        }
+    }
+    function myFunction2() {
+        var div1 = document.getElementById('1');
+        var div2 = document.getElementById('2');
+        if(div1.style.display = 'none') {
+            div2.style.display ='none';
+            div1.style.display = 'block';
+        }
+    }
+	function openDialog() {
+	    document.getElementById('1').style.display='block';
+	    document.getElementById('fade').style.display='block'
+	}
+	function closeDialog() {
+	    document.getElementById('1').style.display='none';
+	    document.getElementById('2').style.display='none';
+	    document.getElementById('fade').style.display='none'
+	}
+	$("#but").click(function(){
+		if($("#procedure_hide").css("display")=="none"){
+			$("#procedure_hide").show();
+		}else{
+			$("#procedure_hide").hide();
+		}
+	});
+	// function hide_signup(event) {
+	// 	var x = event.target;
+	// 	if(x.tagName != 'DIV' || 'BUTTON') {
+	// 		document.getElementById('1').style.display='none';
+	// 		document.getElementById('2').style.display='none';
+	// 	}
+	// }
+
+
+</script>
+{% endblock %}
+

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from accounts.models import Accounts
+from django.http import HttpResponse
 def index(request):
     role = ''
     if request.user.id:
@@ -17,4 +18,5 @@ def index(request):
         return render(request,'home.html')
 
 
-
+def procedure(request):
+    return render(request,"procedures.html")

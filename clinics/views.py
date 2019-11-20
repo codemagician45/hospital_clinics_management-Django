@@ -68,6 +68,7 @@ def confirm_booking(request,slug):
     clinic_link = clinic.slug
     question = ""
     if request.method == 'POST':
+        print(request.POST)
         booking = Booking()
         booking.fname = request.POST['fname']
         booking.email = request.POST['email']

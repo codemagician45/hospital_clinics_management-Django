@@ -34,22 +34,18 @@
                                 <td>{{book.phone}}</td>
                                 <td>{{book.dateTime}}</td>
                                 {% if book.status == 'accepted' %}
-                                    <td>
-                                        <p>Accepted</p>
-                                    </td>
-                                    <td></td>
+                                    <td><p>Accepted</p></td>
+                                    <td><p style="visibility: hidden;">Rejected</p></td>
                                 {% elif book.status == 'rejected' %}
-                                    <td></td>
-                                    <td>
-                                        <p>Rejected</p>
-                                    </td>
+                                    <td><p style="visibility: hidden;">Accepted</p></td>
+                                    <td><p>Rejected</p></td>
                                 {% else %}
                                     <td>
-                                        <p id="accepted{{book.id}}" style="display: none;">Accepted</p>
+                                        <p id="accepted{{book.id}}" style="visibility: hidden;">Accepted</p>
                                         <button class="btn btn-success accept_btn" id="accept{{book.id}}">Accept</button>
                                     </td>
                                     <td>
-                                        <p id="rejected{{book.id}}" style="display: none;">Rejected</p>
+                                        <p id="rejected{{book.id}}" style="visibility: hidden;">Rejected</p>
                                         <button class="btn btn-danger reject_btn" id="reject{{book.id}}">Reject</button>
                                     </td>
                                 {% endif %}
@@ -89,7 +85,7 @@
                 success: function (res) {
                     console.log(res)
                     $('#'+'accept'+res).css("display","none");
-                    $('#'+'accepted'+res).css("display","block");
+                    $('#'+'accepted'+res).css("visibility","visible");
                     $('#'+'reject'+res).css("display","none");
                 }
             });
@@ -109,7 +105,7 @@
                 success: function (res) {
                     console.log(res)
                     $('#'+'reject'+res).css("display","none");
-                    $('#'+'rejected'+res).css("display","block");
+                    $('#'+'rejected'+res).css("visibility","visible");
                     $('#'+'accept'+res).css("display","none");
                 }
             });

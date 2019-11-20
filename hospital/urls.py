@@ -25,7 +25,8 @@ urlpatterns = [
     path('clinics/', include('clinics.urls')),
     path('accounts/', include('accounts.urls')),
     path('oauth/', include('social_django.urls', namespace='social')),
-    path('chat/',include('chat.urls'))
+    path('chat/',include('chat.urls')),
+    path('procedures',views.procedure)
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

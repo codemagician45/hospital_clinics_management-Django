@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<div class="section_nav">
+		<div class="wrapper">
+			<div class="header">
+				<div class="homepage_icon">
+					<h3>Radiology examination</h3>
+				</div>
+				<div class="login_header">
+						<p>Login:</p>
+						<button class="login_button" onclick="openDialog()">I am a patient</button>
+						<button class="login_button" onclick="openDialog()">I am a doctor</button>
+				</div>
+			</div>
+			<div class="header">
+				<ul class="box" style="background-color: #e1e8f5;">
+					<li class="box nav">
+						<a href="home.html" class="nav_link nav_font">Home</a>
+					</li>
+					<li class="box nav">
+						<a href='procedures.html' class="nav_link nav_font">Procedures</a>
+					</li>
+					<li class="box nav">
+						<a href="booking.html" class="nav_link nav_font">Booking</a>
+					</li>
+					<li class="box nav">
+					<a href="chating.html" class="nav_link nav_font">Chating</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="1" class="login_box center_in_center">
+			<div>
+				Sign up
+				<a href="#" onclick="closeDialog()" class="a_login">X</a>
+			</div>
+			<input type="text" name="signUpE" placeholder="Email address" class="input_login">
+			<input type="text" name="signUpP" placeholder="Password" class="input_login">
+			<input type="text" name="signUpF" placeholder="First Name" class="input_login">
+			<input type="text" name="signUpL" placeholder="Last Name" class="input_login">
+			<input type="text" name="signUpE" placeholder="Contact Number" class="input_login">
+			<input type="submit" name="signup-button" value="Sign Up" class="input_submit">
+			<div>
+				Already have an account?
+				<button id="b1" onclick="myFunction1()">Sign in</button>
+			</div>
+		</div>
+		<div id="2" class="login_box center_in_center">
+			<div>
+				Sign in
+				<a href="#" onclick="closeDialog()" class="a_login">X</a>
+			</div>
+			<input type="text" name="signUpE" placeholder="Email address" class="input_login">
+			<input type="text" name="signUpP" placeholder="Password" class="input_login">
+			<input type="submit" name="signup-button" value="Sign in" class="input_submit">
+			<div>
+				Sign up?
+				<button id="b2" onclick="myFunction2()">Sign up</button>
+			</div>
+		</div>
+	</div>
+<!-- 	<h1>
+		GET HELP
+	</h1>
+	<div class="search">
+		<input type="text" class="search_input center" placeholder="What can we help you with?"/>
+	</div> -->
+	<div class="wrapper">
+		<div class="Slideshow_box">
+			<image class="mySlides Slideshow_image" src="images/dp1.jpg"></image>
+			<image class="mySlides Slideshow_image" src="images/dp2.jpg"></image>
+			<image class="mySlides Slideshow_image" src="images/dp3.jpg"></image>
+		</div>
+
+		<div class="image_box">
+			<div class="image_format">
+				<a href="booking.html">
+					<img src="images/e1.jpg" width="200" height="200">
+					<span style="position: absolute; top: 10px; left: 0; text-align: center; color: white;">Make an appointment</span>
+				</a>
+			</div>
+			<div class="image_format">
+				<img src="images/e2.jpg" width="200" height="200">
+			</div>
+			<div class="image_format">
+				<img src="images/e3.jpg" width="200" height="200">
+			</div>
+			<div class="image_format">
+				<img src="images/e4.jpg" width="200" height="200">
+			</div>
+		</div>
+		<div>
+			<p>Radiology is the medical specialty that uses medical imaging to diagnose and treat diseases within the bodies of both humans and animals.</p>
+			<p>A variety of imaging techniques such as X-ray radiography, ultrasound, computed tomography (CT), nuclear medicine including positron emission tomography (PET), and magnetic resonance imaging (MRI) are used to diagnose or treat diseases. Interventional radiology is the performance of usually minimally invasive medical procedures with the guidance of imaging technologies such as those mentioned above.</p>
+		</div>
+	</div>
+
+<!-- 	footer-->
+	<div class="footer_sec">
+		<div class="wrapper">
+
+			<div class="footer_col">
+				<p class="footer_font">Maybe you are looking for:</p>	
+				<ul class="">
+					<li>
+						<a href='procedures.html' class="footer_font">Procedures</a>
+					</li>
+					<li>
+						<a href="booking.html" class="footer_font">Booking</a>
+					</li>
+					<li>
+						<a href="chating.html" class="footer_font">Chating</a>
+					</li>
+					<li>
+						<a href="#top" class="footer_font">Contact us</a>
+					</li>
+				</ul>
+			</div>
+			<div class="footer_col">
+				<p class="footer_font">Maybe you are looking for:</p>	
+				<ul class="">
+					<li>
+						<a href='procedures.html' class="footer_font">Procedures</a>
+					</li>
+					<li>
+						<a href="booking.html" class="footer_font">Booking</a>
+					</li>
+					<li>
+						<a href="chating.html" class="footer_font">Chating</a>
+					</li>
+					<li>
+						<a href="#top" class="footer_font">Contact us</a>
+					</li>
+				</ul>
+			</div>
+			<div class="back_to_top">
+				<a href="#top" class="footer_font">Back to top</a>
+			</div>
+		</div>
+	</div>
+
+<div id="fade" class="black_overlay"></div>
+</body>
+</html>
+
+<script type="text/javascript">
+    function myFunction1() {
+        var div1 = document.getElementById('1');
+        var div2 = document.getElementById('2');
+        if(div2.style.display = 'none') {
+            div1.style.display ='none';
+            div2.style.display = 'block';
+        }
+    }
+    function myFunction2() {
+        var div1 = document.getElementById('1');
+        var div2 = document.getElementById('2');
+        if(div1.style.display = 'none') {
+            div2.style.display ='none';
+            div1.style.display = 'block';
+        }
+    }
+	function openDialog() {
+	    document.getElementById('1').style.display='block';
+	    document.getElementById('fade').style.display='block'
+	}
+	function closeDialog() {
+	    document.getElementById('1').style.display='none';
+	    document.getElementById('2').style.display='none';
+	    document.getElementById('fade').style.display='none'
+	}
+	$("#but").click(function(){
+		if($("#procedure_hide").css("display")=="none"){
+			$("#procedure_hide").show();
+		}else{
+			$("#procedure_hide").hide();
+		}
+	});
+	// function hide_signup(event) {
+	// 	var x = event.target;
+	// 	if(x.tagName != 'DIV' || 'BUTTON') {
+	// 		document.getElementById('1').style.display='none';
+	// 		document.getElementById('2').style.display='none';
+	// 	}
+	// }
+	var myIndex = 0;
+	carousel();
+
+	function carousel() {
+	  var i;
+	  var x = document.getElementsByClassName("mySlides");
+	  for (i = 0; i < x.length; i++) {
+	    x[i].style.display = "none";  
+	  }
+	  myIndex++;
+	  if (myIndex > x.length) {myIndex = 1}    
+	  x[myIndex-1].style.display = "block";  
+	  setTimeout(carousel, 2000); // Change image every 2 seconds
+	}
+
+</script>
